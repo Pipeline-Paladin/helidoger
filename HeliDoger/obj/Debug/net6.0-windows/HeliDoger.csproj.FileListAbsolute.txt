@@ -46,3 +46,4 @@ C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content
 C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\BackGround\blueskyl.xnb
 C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\BackGround\cloud.xnb
 C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\BackGround\ground.xnb
+C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\BackGround\newground.xnb

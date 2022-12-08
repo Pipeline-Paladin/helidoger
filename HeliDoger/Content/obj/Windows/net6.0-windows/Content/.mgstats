@@ -1,4 +1,1 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/BackGround/blueskyl.PNG","C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/bin/Windows/Content/BackGround/blueskyl.xnb","TextureProcessor","Texture2DContent",5427,4074645,0,1728949
-"C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/BackGround/cloud.png","C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/bin/Windows/Content/BackGround/cloud.xnb","TextureProcessor","Texture2DContent",37414,1248805,0,0313306
-"C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/BackGround/ground.png","C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/bin/Windows/Content/BackGround/ground.xnb","TextureProcessor","Texture2DContent",8897,675877,0,0132145

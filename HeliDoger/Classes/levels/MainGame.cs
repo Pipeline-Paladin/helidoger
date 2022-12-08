@@ -19,23 +19,24 @@ namespace HeliDoger.Classes.levels
     {
 
         //Varables
-        private Player _diver;
+        private Player _player;
         private skybox _background;
 
         public MainGame(ContentManager content) : base(content)
         {
 
-           
+            _player = new Player();
             _background = new skybox(content);
         }
         public override void initobj()
         {
-           
+            _player = new Player();
 
         }
-            public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(_background.sky, _background.positionSky, Color.White);
+            spriteBatch.Draw(_background.ground, _background.positionGround, Color.White);
 
         }
     }

@@ -26,7 +26,7 @@ namespace HeliDoger.Classes.levels.background
         public skybox(ContentManager content)
         {
             positionSky = new Rectangle(0, 0, Game1.ScreenWidth, Game1.ScreenHeight);
-            positionGround = new Rectangle(0, 0, Game1.ScreenWidth, Game1.ScreenHeight);
+            positionGround = new Rectangle(0, 700, Game1.ScreenWidth, 113);
             positionBackground = new Rectangle(0, 0, Game1.ScreenWidth, Game1.ScreenHeight);
 
             sky = content.Load<Texture2D>("BackGround/blueskyl");
