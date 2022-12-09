@@ -30,7 +30,7 @@ namespace HeliDoger.Classes
              
         }
 
-        public override void initobj()
+        public override void InitializeObjects()
         {
             _font = _content.Load<SpriteFont>("fonts/game");
             this._sound = _content.Load<SoundEffect>("Music/MainMusic");

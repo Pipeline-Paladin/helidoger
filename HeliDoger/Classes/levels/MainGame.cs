@@ -36,7 +36,8 @@ namespace HeliDoger.Classes.levels
             GameObjects.Add(_player);
             _background = new skybox(content);
             bird = new Bird(this._content.Load<Texture2D>("enemy/bird"));
-            bird.LoadContent(content);
+            GameObjects.Add(bird);
+           
         }
         public override void Update(GameTime time, MouseState mouse)
         {
@@ -64,7 +65,7 @@ namespace HeliDoger.Classes.levels
             //gravity
             _player.Move(0, gravity);
         }
-        public override void initobj()
+        public override void InitializeObjects()
         {
 
            
@@ -77,7 +78,7 @@ namespace HeliDoger.Classes.levels
             spriteBatch.Draw(_background.sky, _background.positionSky, Color.White);
             spriteBatch.Draw(_background.ground, _background.positionGround, Color.White);
             spriteBatch.Draw(_player._texture, _player.Position, _player.Animation.CurrentFrame.OriginRectangle,Color.White, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 0f);
-
+            base.Draw(spriteBatch);
         }
     }
 }

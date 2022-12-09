@@ -22,7 +22,7 @@ namespace HeliDoger.Classes.player
         public Player(Texture2D texture)
         {
             _texture = texture;
-            Animation = new Animation(3);
+            Animation = new Animation(4);
             lives = 3;
             for (int i = 0; i < 3; i++)
             {
@@ -33,7 +33,6 @@ namespace HeliDoger.Classes.player
         public void LoadContent(ContentManager Content)
         {
 
-            _texture = Content.Load<Texture2D>("player/helicopter");
 
         }
         public override void Draw(SpriteBatch spriteBatch)

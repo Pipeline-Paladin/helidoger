@@ -21,10 +21,10 @@ namespace HeliDoger.Interfaces
             this._content = content;
             this.GameObjects = new List<IGameObject>();
 
-            initobj();
+            InitializeObjects();
         }
 
-        public abstract void initobj();
+        public abstract void InitializeObjects();
 
         public virtual void Update(GameTime time, MouseState mouse)
         {

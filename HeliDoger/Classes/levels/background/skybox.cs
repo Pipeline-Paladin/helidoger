@@ -10,10 +10,12 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
+using HeliDoger.Interfaces;
+using Microsoft.Xna.Framework.Input;
 
 namespace HeliDoger.Classes.levels.background
 {
-     public class skybox
+     public class skybox 
     {
 
        
