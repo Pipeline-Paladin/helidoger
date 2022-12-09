@@ -13,15 +13,15 @@ namespace HeliDoger
         private SpriteBatch _spriteBatch;
         private IScreen _gameScreen;
        
-        private IScreen _newGameScreen;
+        private IScreen _tempGameScreen;
 
       
       
         public static Game1 gameState { get; private set; }
 
-        //screensize adjusting
-         public static int ScreenWidth = 1422;
-         public static int ScreenHeight = 800;
+        public static int
+             ScreenWidth = 1422,
+             ScreenHeight = 800;
 
         public Game1()
         {
@@ -36,15 +36,17 @@ namespace HeliDoger
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            Window.AllowUserResizing = false;
+            Window.AllowAltF4 = true;
+            Window.Title = "HeliDoger";
             _gameScreen = new MenuScreen(Content);
-            
+           
+
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            //screensize adjusting
             _graphics.PreferredBackBufferWidth = ScreenWidth;
             _graphics.PreferredBackBufferHeight = ScreenHeight;
             _graphics.ApplyChanges();
@@ -61,16 +63,16 @@ namespace HeliDoger
         protected override void Draw(GameTime gameTime)
         {
 
-            _spriteBatch.Begin(transformMatrix: _gameScreen.Camera.GetTransform());
+            _spriteBatch.Begin();
             _gameScreen.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
 
-            if (_newGameScreen != null)
+            if (_tempGameScreen != null)
             {
-                _gameScreen = _newGameScreen;
-                _newGameScreen = null;
+                _gameScreen = _tempGameScreen;
+                _tempGameScreen = null;
             }
         }
         
@@ -79,17 +81,17 @@ namespace HeliDoger
               switch (newState)
             {
                 case "menu":
-                    _newGameScreen = new MenuScreen(Content);
+                    _tempGameScreen = new MenuScreen(Content);
                     break;
                
                 case "start":
-                    _newGameScreen = new MainGame(Content);
+                    _tempGameScreen = new MainGame(Content);
                     break;
                 case "info":
-                    _newGameScreen = new MenuScreen(Content);
+                    _tempGameScreen = new MenuScreen(Content);
                     break;
                 case "deathscreen":
-                    _newGameScreen = new MenuScreen(Content);
+                    _tempGameScreen = new MenuScreen(Content);
                     break;
                 case "back":
                     

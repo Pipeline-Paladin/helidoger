@@ -29,7 +29,7 @@ namespace HeliDoger.Interfaces
 
         public override bool IsColliding(IGameObject gameObject, GameTime time)
         {
-            var bounds = this.GetBounds(time);  //CChineseNaam
+            var bounds = this.GetBounds(time); 
             return !Rectangle.Intersect(bounds, gameObject.GetBounds(time)).IsEmpty;
         }
 

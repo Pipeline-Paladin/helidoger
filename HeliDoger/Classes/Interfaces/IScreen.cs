@@ -9,14 +9,14 @@ namespace HeliDoger.Interfaces
 {
     public abstract class IScreen
     {
-        public Camera Camera { get; private set; }
+       
 
         public List<IGameObject> GameObjects { get; protected set; }
         protected ContentManager _content;
 
         public IScreen(ContentManager content)
         {
-            this.Camera = new Camera();
+            
 
             this._content = content;
             this.GameObjects = new List<IGameObject>();

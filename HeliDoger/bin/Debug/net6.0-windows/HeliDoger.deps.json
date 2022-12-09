@@ -9,7 +9,9 @@
       "HeliDoger/1.0.0": {
         "dependencies": {
           "MonoGame.Content.Builder.Task": "3.8.1.303",
-          "MonoGame.Framework.WindowsDX": "3.8.1.303"
+          "MonoGame.Extended": "3.8.0",
+          "MonoGame.Framework.WindowsDX": "3.8.1.303",
+          "Ryan.MonoGame.Extended": "1.0.4"
         },
         "runtime": {
           "HeliDoger.dll": {}
@@ -263,6 +265,11 @@
         }
       },
       "MonoGame.Content.Builder.Task/3.8.1.303": {},
+      "MonoGame.Extended/3.8.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3"
+        }
+      },
       "MonoGame.Framework.WindowsDX/3.8.1.303": {
         "dependencies": {
           "SharpDX": "4.0.1",
@@ -328,6 +335,14 @@
           "System.Xml.XDocument": "4.0.11"
         }
       },
+      "Newtonsoft.Json/12.0.3": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.3.23909"
+          }
+        }
+      },
       "runtime.native.System/4.0.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.2",
@@ -356,6 +371,17 @@
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.2",
           "Microsoft.NETCore.Targets": "1.0.3"
+        }
+      },
+      "Ryan.MonoGame.Extended/1.0.4": {
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/MonoGame.Extended.dll": {
+            "assemblyVersion": "1.0.4.0",
+            "fileVersion": "1.0.4.0"
+          }
         }
       },
       "SharpDX/4.0.1": {
@@ -1616,6 +1642,13 @@
       "path": "monogame.content.builder.task/3.8.1.303",
       "hashPath": "monogame.content.builder.task.3.8.1.303.nupkg.sha512"
     },
+    "MonoGame.Extended/3.8.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FDPoUOFtslGNHCWSqjKD0C67RYN6Stb6NWnn+rkCmtkPBZlE6LvwuGyQBkHUkAMANO3LzO/Wsz9etMhwZLInqg==",
+      "path": "monogame.extended/3.8.0",
+      "hashPath": "monogame.extended.3.8.0.nupkg.sha512"
+    },
     "MonoGame.Framework.WindowsDX/3.8.1.303": {
       "type": "package",
       "serviceable": true,
@@ -1629,6 +1662,13 @@
       "sha512": "sha512-ypsCvIdCZ4IoYASJHt6tF2fMo7N30NLgV1EbmC+snO490OMl9FvVxmumw14rhReWU3j3g7BYudG6YCrchwHJlA==",
       "path": "netstandard.library/1.6.0",
       "hashPath": "netstandard.library.1.6.0.nupkg.sha512"
+    },
+    "Newtonsoft.Json/12.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+      "path": "newtonsoft.json/12.0.3",
+      "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
     },
     "runtime.native.System/4.0.0": {
       "type": "package",
@@ -1664,6 +1704,13 @@
       "sha512": "sha512-6Z4SIheH5ziCRoMnLBE+fmcAPfyewKbteJQGTT86+dsBRSYZNuUmLS3Qg+rzo1nPdiK19VmOBne54j9kI7sI4Q==",
       "path": "runtime.native.system.security.cryptography/4.0.1",
       "hashPath": "runtime.native.system.security.cryptography.4.0.1.nupkg.sha512"
+    },
+    "Ryan.MonoGame.Extended/1.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GodgDnL2t5HX9APANpY/vCotTWbGkOrgeH5Ha6qn0IZw6hW55GyWlNkSVmy75C0gaU2G9FbHDfdXPLyeRYtevQ==",
+      "path": "ryan.monogame.extended/1.0.4",
+      "hashPath": "ryan.monogame.extended.1.0.4.nupkg.sha512"
     },
     "SharpDX/4.0.1": {
       "type": "package",

@@ -12,13 +12,13 @@ namespace HeliDoger.Classes
 {
     class MenuScreen : IScreen
     {
-        #region TexturesAndSounds
-        private Texture2D _backgroundTexture;
+        
+        private Texture2D _background;
         private SoundEffect _sound;
-        #endregion
+      
 
         private Button _play;
-        private Button _info;
+        //private Button _info;
         
         
         private SpriteFont _font;
@@ -38,12 +38,14 @@ namespace HeliDoger.Classes
             backgroundMusic.IsLooped = true;
             backgroundMusic.Play();
 
+            /*
             _info = new Button(_content.Load<Texture2D>("Button/info"), 
                 new Rectangle(0, 200, 300, 100));
             _info.ClickAction = () =>
             {
                 Game1.gameState.ChangeScreen("info");
             };
+            */
 
             //start
             _play = new Button(_content.Load<Texture2D>("Button/start"), 
@@ -53,12 +55,12 @@ namespace HeliDoger.Classes
                 Game1.gameState.ChangeScreen("start");
                 
             };
-          
 
-            _backgroundTexture = _content.Load<Texture2D>("BackGround/BackgroundMenu");
 
-            //gameobjects add shit here
-            GameObjects.Add(_info);
+            _background = _content.Load<Texture2D>("BackGround/BackgroundMenu");
+
+            //gameobjects 
+            //GameObjects.Add(_info);
             GameObjects.Add(_play);
          
          
@@ -72,9 +74,9 @@ namespace HeliDoger.Classes
         public override void Draw(SpriteBatch spriteBatch)
         {
            
-            spriteBatch.Draw(_backgroundTexture, new Rectangle(0, 0, Game1.ScreenWidth, 
+            spriteBatch.Draw(_background, new Rectangle(0, 0, Game1.ScreenWidth, 
                 Game1.ScreenHeight), Color.White);
-            spriteBatch.DrawString(_font, "welcome to my game", new Vector2(0, 0), Color.White);
+            spriteBatch.DrawString(_font, "welcome to HeliDoger", new Vector2(0, 0), Color.White);
             base.Draw(spriteBatch);
         }
 
