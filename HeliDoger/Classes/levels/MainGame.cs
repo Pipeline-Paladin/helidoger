@@ -1,84 +1,94 @@
-﻿using HeliDoger.Classes.levels.background;
-using HeliDoger.Classes.player;
-using HeliDoger.Interfaces;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
+﻿using System;
+using HeliDoger;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using HeliDoger.Animations;
-using SharpDX.Direct3D9;
-using HeliDoger.Classes.Interfaces;
-using HeliDoger.Classes.enemy;
 
-namespace HeliDoger.Classes.levels
+using HeliDoger.abstractclasses;
+using SharpDX.Direct2D1;
+using SpriteBatch = Microsoft.Xna.Framework.Graphics.SpriteBatch;
+
+namespace HeliDoger.Classes
 {
-    internal class MainGame : IScreen
+    class MainGame : IScreen
     {
+        #region TexturesAndSounds
+        private Texture2D _staticBackground;
+        private Texture2D _lives3;
+        private Texture2D _lives2;
+        private Texture2D _lives1;
+        private SpriteFont _scoreFont;
+        private SoundEffect _sound;
+        SoundEffectInstance breathingSound;
+        #endregion
 
-        //Varables
-        private Player _player;
-        private skybox _background;
-        private int gravity = 50;
-        private int playerspeed = 100;
-        Bird bird;
+        private player _player;
+        private LevelGen _generator;
+        private Mountains _mountains;
+
         public MainGame(ContentManager content) : base(content)
         {
-           
-            _player = new Player(_content.Load<Texture2D>("player/helicopter"));
-            GameObjects.Add(_player);
-            _background = new skybox(content);
-            bird = new Bird(this._content.Load<Texture2D>("enemy/bird"));
-            GameObjects.Add(bird);
-           
+            Game1.gamestate.IsMouseVisible = false;
+
+            var factory = new LevelFactory(content);
+            this._generator = new LevelGen(this, factory);
+            this._mountains = new Mountains(this, factory);
         }
-        public override void Update(GameTime time, MouseState mouse)
-        {
-            base.Update(time, mouse);
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            {
-                _player.Move(0, -playerspeed-gravity);
 
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                _player.Move(0, playerspeed);
-
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                _player.Move(playerspeed, 0);
-
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                _player.Move(-playerspeed, 0);
-
-            }
-            //gravity
-            _player.Move(0, gravity);
-        }
         public override void InitializeObjects()
         {
+            _sound = _content.Load<SoundEffect>("Music/MainMusic");
+            breathingSound = _sound.CreateInstance();
+            breathingSound.IsLooped = true;
+            breathingSound.Play();
+            _player = new player(_content.Load<Texture2D>("player/helicopter"), 2);
+            GameObjects.Add(_player);
 
-           
-
-
+            _staticBackground = _content.Load<Texture2D>("Background/blueskyl");
+            _scoreFont = _content.Load<SpriteFont>("Fonts/game");
+            _lives3 = _content.Load<Texture2D>("Background/cloud");
+            _lives2 = _content.Load<Texture2D>("player/helicopter");
+            _lives1 = _content.Load<Texture2D>("Background/cloud");
         }
+
+
+        public override void Update(GameTime time, MouseState mouseState)
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape)) 
+            {
+                Game1.gamestate.ChangeScreen(GameState.MainMenu);
+                breathingSound.Stop();
+            }
+
+            base.Update(time, mouseState);
+
+            this.Camera.Position = new Vector2(_player.Position.X + Game1.ScreenWidth 
+                / 2 - 0f * _player.Size.X, 0f);
+            this._generator.Update(this._player.Position);
+            this._mountains.Update(this._player.Position);
+            if (_player.Lives == 0)
+                breathingSound.Stop();
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
-            
-            spriteBatch.Draw(_background.sky, _background.positionSky, Color.White);
-            spriteBatch.Draw(_background.ground, _background.positionGround, Color.White);
-            spriteBatch.Draw(_player._texture, _player.Position, _player.Animation.CurrentFrame.OriginRectangle,Color.White, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 0f);
+            var statPos = this.Camera.Position - new Vector2(Game1.ScreenWidth, 
+                Game1.ScreenHeight) / 2f;
+            spriteBatch.Draw(_staticBackground, new Rectangle(Convert.ToInt32(statPos.X), 
+                Convert.ToInt32(statPos.Y), Game1.ScreenWidth, Game1.ScreenHeight), Color.White);
             base.Draw(spriteBatch);
+            spriteBatch.DrawString(_scoreFont, "coins: " + _player.Coins, 
+                new Vector2(this.Camera.Position.X + 400, this.Camera.Position.Y - 390), Color.White);
+
+            if (_player.Lives == 3)
+                spriteBatch.Draw(_lives3, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 450, Convert.ToInt32(this.Camera.Position.Y) - 300, 150, 50),Color.White);
+            else if (_player.Lives == 2)
+                spriteBatch.Draw(_lives2, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 450, Convert.ToInt32(this.Camera.Position.Y) - 300, 150, 50), Color.White);
+            else if (_player.Lives == 1)
+                spriteBatch.Draw(_lives1, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 450, Convert.ToInt32(this.Camera.Position.Y) - 300, 150, 50), Color.White);
+
         }
     }
 }

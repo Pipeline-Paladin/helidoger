@@ -1,1 +1,3 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/objects/coin.png","C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/bin/Windows/objects/coin.xnb","TextureProcessor","Texture2DContent",14956,218197,0,1718689
+"C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/tiles/cloud.png","C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/bin/Windows/tiles/cloud.xnb","TextureProcessor","Texture2DContent",1468,16469,0,0062252

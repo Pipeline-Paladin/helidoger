@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-using HeliDoger.Interfaces;
+using HeliDoger.abstractclasses;
 
 namespace HeliDoger.Classes
 {
