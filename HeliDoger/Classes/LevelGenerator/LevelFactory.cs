@@ -8,6 +8,8 @@ using HeliDoger.Classes.Enemies;
 using HeliDoger.Classes.Objects;
 using HeliDoger.abstractclasses;
 using HeliDoger.Classes.background;
+using Microsoft.Xna.Framework.Input;
+using System.Reflection.Metadata;
 
 namespace HeliDoger.Classes
 {
@@ -27,20 +29,17 @@ namespace HeliDoger.Classes
             var yPos = Game1.ScreenHeight / 2;
 
             var pos = new Vector2(x, top ? -yPos : yPos);
-            var wall = new Wall(this._content.Load<Texture2D>("tiles/tiles2"), pos);
+            Wall wall;
             if (top)
             {
                  wall = new Wall(this._content.Load<Texture2D>("tiles/cloud"), pos);
             }
             else
-            { 
-             wall = new Wall(this._content.Load<Texture2D>("tiles/tiles2"), pos);
-            
+            {
+                 wall = new Wall(this._content.Load<Texture2D>("tiles/tiles2"), pos);
+                 wall.Position -= new Vector2(0, wall.Size.Y);
             }
-            
-
-            if(!top) wall.Position -= new Vector2(0, wall.Size.Y);
-
+           
             return wall;
         }
 
@@ -48,38 +47,44 @@ namespace HeliDoger.Classes
         {
             int type = _random.Next(0, 4); 
             Enemy enemy =null;
-            
-            if (type == 0) 
-            {
-                enemy = new AirBaloon(this._content.Load<Texture2D>("enemy/AirBaloon"), x);
-            }
-            else if (type == 1)
-            {
-                enemy = new bird(this._content.Load<Texture2D>("enemy/bird"), x);
-            }
-            else if (type == 2)
-            {
-                enemy = new Tree(this._content.Load<Texture2D>("enemy/tree"),x);
-            }
-            else if (type == 3) 
-            {
-                enemy = new TigerShark(this._content.Load<Texture2D>("enemy/bird"), x);
-            }
 
+            switch (type)
+            {
+                case 0:
+                    enemy = new AirBaloon(this._content.Load<Texture2D>("enemy/AirBaloon"), x); ;
+                    break;
+
+                case 1:
+                    enemy = new bird(this._content.Load<Texture2D>("enemy/bird"), x);
+                    break;
+                case 2:
+                    enemy = new Tree(this._content.Load<Texture2D>("enemy/tree"), x);
+                    break;
+                case 3:
+                    enemy = new TigerShark(this._content.Load<Texture2D>("enemy/bird"), x);
+                    break;
+            }
             return enemy;
         }
 
-        public GameObject CreateMountain(float x)
+        public GameObject CreateCoin(float x)
+        {
+            int ypos = _random.Next(0, 2);
+            return new coin(this._content.Load<Texture2D>("Objects/coin"), new Vector2(x, ypos));
+        }
+        public GameObject CreatePowerup(float x)
+        {
+            int ypos = _random.Next(0, 2);
+            return new PowerUp(this._content.Load<Texture2D>("Objects/hearth"), new Vector2(x, ypos));
+
+        }
+            public GameObject CreateFrontCloud(float x)
         {
             return new Clouds(this._content.Load<Texture2D>("Background/cloud"), x);
         }
         
         
-        public GameObject CreateCoin(float x)
-        {
-            int ypos = _random.Next(0,2);
-            return new coin(this._content.Load<Texture2D>("Objects/coin"),new Vector2(x, ypos));
-        }
+       
        
     }
 }

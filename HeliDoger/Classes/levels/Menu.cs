@@ -38,7 +38,7 @@ namespace HeliDoger.Classes
             _controls.ClickAction = () =>
             {
                 backgroundMusic.Stop();
-                Game1.gamestate.ChangeScreen(GameState.Controls);
+                Game1.gamestate.ChangeScreen("info");
             };
 
             _play = new Button(_content.Load<Texture2D>("Button/start"), 
@@ -46,7 +46,7 @@ namespace HeliDoger.Classes
             _play.ClickAction = () =>
             {
                 backgroundMusic.Stop();
-                Game1.gamestate.ChangeScreen(GameState.Playing);
+                Game1.gamestate.ChangeScreen("play");
             };
 
             _exit = new Button(_content.Load<Texture2D>("Button/back"), 

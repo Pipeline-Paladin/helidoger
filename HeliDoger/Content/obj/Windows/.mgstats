@@ -1,3 +1,4 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/objects/coin.png","C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/bin/Windows/objects/coin.xnb","TextureProcessor","Texture2DContent",14956,218197,0,1718689
-"C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/tiles/cloud.png","C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/bin/Windows/tiles/cloud.xnb","TextureProcessor","Texture2DContent",1468,16469,0,0062252
+"C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/BackGround/cloud.png","C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/bin/Windows/BackGround/cloud.xnb","TextureProcessor","Texture2DContent",98786,1248805,0,140713
+"C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/Music/DeathEffect.wav","C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/bin/Windows/Music/DeathEffect.xnb","SoundEffectProcessor","SoundEffectContent",526284,526177,0,2900572
+"C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/objects/hearth.png","C:/Users/vanoe/source/repos/HeliDoger/HeliDoger/Content/bin/Windows/objects/hearth.xnb","TextureProcessor","Texture2DContent",794,260085,0,023219

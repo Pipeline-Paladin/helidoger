@@ -9,6 +9,9 @@ using HeliDoger.Animations;
 using HeliDoger.Classes;
 using HeliDoger.Classes.Objects;
 using HeliDoger.abstractclasses;
+using MonoGame.Extended.Timers;
+using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace HeliDoger
 {
@@ -24,6 +27,13 @@ namespace HeliDoger
         public int Lives { get; private set; } = 3;
         private bool _invincible = false;
 
+     
+        private void timer(GameTime gameTime) {
+
+           
+            double time = gameTime.ElapsedGameTime.TotalSeconds;
+
+        }
         public player(Texture2D texture, int fps) : base()
         {
             this.DrawOrder = 5;
@@ -46,13 +56,8 @@ namespace HeliDoger
         {
             scoins = Coins;
             KeyboardState keyboard = Keyboard.GetState();
-
-            // Update sprite
             Animation.Update(gameTime);
-
-            // Constantly move right
-            this.Position += new Vector2(this._speed, 0f) * 
-                Convert.ToSingle(gameTime.ElapsedGameTime.TotalSeconds);
+            this.Position += new Vector2(this._speed, 0f) * Convert.ToSingle(gameTime.ElapsedGameTime.TotalSeconds);
             
             if (keyboard.IsKeyDown(Keys.Down))
             {
@@ -64,8 +69,10 @@ namespace HeliDoger
                 Animation.Update(gameTime);
                 this.Move(0, -this._speed);
             }
+            timer(gameTime);
 
-            
+
+
             IncrementSpeed();
         }
 
@@ -79,12 +86,12 @@ namespace HeliDoger
                 {
                     this.Lives -= 1;
                     _invincible = true;
+                 
                 }
 
                 if (this.Lives == 0) 
-                {
-                    
-                    Game1.gamestate.ChangeScreen(GameState.GameOver);
+                {               
+                    Game1.gamestate.ChangeScreen("death");
                 }
             }
             if (gameObject is coin) 
@@ -94,6 +101,17 @@ namespace HeliDoger
                 Coins += 1;
                 gameObject.Position = Vector2.Zero;
             }
+            
+            if (gameObject is PowerUp) 
+            {
+               
+                if (Lives < 3)
+                {
+                    Lives++;
+                }
+                gameObject.Position = Vector2.Zero;
+            }
+                
         }
 
         public override void Draw(SpriteBatch spriteBatch)

@@ -17,7 +17,7 @@ namespace HeliDoger.Classes.Objects
             this.Size = this._texture.Bounds.Size.ToVector2() * 0.3f;
             this.DrawOrder = 0;
 
-            int ypos = random.Next(-400, 0);           //-400 top, 0 middle of screen
+            int ypos = random.Next(-400, -100);       
             this.Position = new Vector2(x, ypos);
         }
 

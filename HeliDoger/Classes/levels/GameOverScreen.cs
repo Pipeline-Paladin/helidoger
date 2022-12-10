@@ -28,25 +28,25 @@ namespace HeliDoger.Classes.Screens
 
         public override void InitializeObjects()
         {
-            _sound = _content.Load<SoundEffect>("Sounds/Heart");
+            _sound = _content.Load<SoundEffect>("Music/DeathEffect");
             _sound.Play();
 
-            _background = _content.Load<Texture2D>("Backgrounds/diveBackground");
+            _background = _content.Load<Texture2D>("BackGround/blueskyl");
             
-            _yes = new Button(_content.Load<Texture2D>("Buttons/YesB"), 
+            _yes = new Button(_content.Load<Texture2D>("Button/start"), 
                 new Rectangle(400, 600, 150, 100));
-            _yes.ClickAction = () => Game1.gamestate.ChangeScreen(GameState.Playing);
+            _yes.ClickAction = () => Game1.gamestate.ChangeScreen("play");
 
 
             GameObjects.Add(_yes);
 
-            _no = new Button(_content.Load<Texture2D>("Buttons/NoB"), 
+            _no = new Button(_content.Load<Texture2D>("Button/info"), 
                 new Rectangle(850, 600, 150, 100));
-            _no.ClickAction = () => Game1.gamestate.ChangeScreen(GameState.MainMenu);
+            _no.ClickAction = () => Game1.gamestate.ChangeScreen("menu");
 
             GameObjects.Add(_no);
 
-            _scoreFont = _content.Load<SpriteFont>("Fonts/FontScore");
+            _scoreFont = _content.Load<SpriteFont>("Fonts/game");
         }
 
         public override void Update(GameTime time, MouseState mouse) 
@@ -59,7 +59,7 @@ namespace HeliDoger.Classes.Screens
             spriteBatch.Draw(_background, new Rectangle(0, 0, 
                 Game1.ScreenWidth, Game1.ScreenHeight), Color.White);
             spriteBatch.DrawString(_scoreFont, "- GAME OVER -", new Vector2(640,300), Color.White);
-            spriteBatch.DrawString(_scoreFont, "Your score was: " + player.scoins, 
+            spriteBatch.DrawString(_scoreFont, "Your score: " + player.scoins, 
                 new Vector2(620, 350), Color.White);
             spriteBatch.DrawString(_scoreFont, "Try again?", new Vector2(650,500), Color.White);
             

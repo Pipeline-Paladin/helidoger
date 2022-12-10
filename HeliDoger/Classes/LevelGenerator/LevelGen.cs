@@ -8,20 +8,18 @@ namespace HeliDoger.Classes
 {
     public class LevelGen 
     {
-        private const double MIN_ENEMY_DIST = 0.5; // Times ScreenWidth
-        private const double MAX_ENEMY_DIST = 1.5;
+     
 
-        private const double MAX_BOTTLE_DIST = 5;
-        private const double MIN_BOTTLE_DIST = 1;
+   
         private Random _rand;
 
         private IScreen _screen;
         private LevelFactory _factory;
 
-        private float _xLocation = -Game1.ScreenWidth;
+        private float _xScreenWidth = -Game1.ScreenWidth;
         private float _Nenemy;
         private float _Ncoin;
-
+        private float _Npower;
 
         public LevelGen(IScreen screen, LevelFactory factory)
         {
@@ -33,36 +31,38 @@ namespace HeliDoger.Classes
 
         private void Init()
         {
-            while(this._xLocation <= Game1.ScreenWidth * 2)
+            while(this._xScreenWidth <= Game1.ScreenWidth * 2)
             {
                 this.CreateBounds();
             }
-            this._Nenemy = this._xLocation;
-            this._Ncoin = this._xLocation;
+            this._Nenemy = this._xScreenWidth;
+            this._Ncoin = this._xScreenWidth;
         }
 
         private void CreateBounds()
         {
-            var ceiling = this._factory.CreateTile(this._xLocation, true);
-            var floor = this._factory.CreateTile(this._xLocation, false);
+            var ceiling = this._factory.CreateTile(this._xScreenWidth, true);
+            var floor = this._factory.CreateTile(this._xScreenWidth, false);
             this._screen.GameObjects.Add(ceiling);
             this._screen.GameObjects.Add(floor);
-            this._xLocation = ceiling.Position.X + ceiling.Size.X;
+            this._xScreenWidth = ceiling.Position.X + ceiling.Size.X;
         }
 
-        private void NextBottle()
+        private void NextCoin()
         {
-            var factor = Convert.ToSingle((this._rand.NextDouble() + 
-                (MAX_BOTTLE_DIST - MIN_BOTTLE_DIST)) + MAX_BOTTLE_DIST);
+            var factor = Convert.ToSingle((this._rand.NextDouble() + 5));
             this._Ncoin += factor * Game1.ScreenWidth;
         }
-
+        private void NextPowerup()
+        {
+            var factor = Convert.ToSingle((this._rand.NextDouble() + 14));
+            this._Npower += factor * Game1.ScreenWidth;
+        }
 
         private void NextEnemy()
         {
-            var factor = Convert.ToSingle((this._rand.NextDouble() +
-                (MAX_ENEMY_DIST - MIN_ENEMY_DIST) ) + MIN_ENEMY_DIST); 
-            this._Nenemy += factor * Game1.ScreenWidth;
+            var space = Convert.ToSingle((this._rand.NextDouble() +1.5)); 
+            this._Nenemy += space * Game1.ScreenWidth;
         }
 
         public void Update(Vector2 playerPosition)
@@ -72,22 +72,23 @@ namespace HeliDoger.Classes
 
         private void Update(float x) 
         {
-            while(this._xLocation - x <= Game1.ScreenWidth * 2)
+            while(this._xScreenWidth - x <= Game1.ScreenWidth * 2)
             {
                 this.CreateBounds();
-                while(this._xLocation >= this._Nenemy)
+                while(this._xScreenWidth >= this._Nenemy)
                 {
                     var enemy = this._factory.CreateEnemy(this._Nenemy);
                     this._screen.GameObjects.Add(enemy);
                     var coin = this._factory.CreateCoin(this._Ncoin);
                     this._screen.GameObjects.Add(coin);
+                    var powerup = this._factory.CreatePowerup(this._Npower);
+                    this._screen.GameObjects.Add(powerup);
 
                     this.NextEnemy();
-                    this.NextBottle();
+                    this.NextCoin();
+                    this.NextPowerup();
                 }
             }
-            
-            // Remove out of screen gameobjects
             this._screen.GameObjects.RemoveAll(obj => x - obj.Position.X >= Game1.ScreenWidth * 2);
         }
     }

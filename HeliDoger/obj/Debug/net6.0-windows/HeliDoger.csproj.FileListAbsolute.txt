@@ -55,3 +55,5 @@ C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content
 C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\tiles\cloud.xnb
 C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\tiles\tiles2.xnb
 C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\objects\coin.xnb
+C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\Music\DeathEffect.xnb
+C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\objects\hearth.xnb

@@ -15,15 +15,13 @@ namespace HeliDoger.Classes
 {
     class MainGame : IScreen
     {
-        #region TexturesAndSounds
+     
         private Texture2D _staticBackground;
-        private Texture2D _lives3;
-        private Texture2D _lives2;
-        private Texture2D _lives1;
-        private SpriteFont _scoreFont;
+        private Texture2D _lives;
+        private SpriteFont _font;
         private SoundEffect _sound;
-        SoundEffectInstance breathingSound;
-        #endregion
+        SoundEffectInstance backgroundmusic;
+    
 
         private player _player;
         private LevelGen _generator;
@@ -42,17 +40,15 @@ namespace HeliDoger.Classes
         public override void InitializeObjects()
         {
             _sound = _content.Load<SoundEffect>("Music/MainMusic");
-            breathingSound = _sound.CreateInstance();
-            breathingSound.IsLooped = true;
-            breathingSound.Play();
+            backgroundmusic = _sound.CreateInstance();
+            backgroundmusic.IsLooped = true;
+            backgroundmusic.Play();
             _player = new player(_content.Load<Texture2D>("player/helicopter"), 2);
             GameObjects.Add(_player);
 
             _staticBackground = _content.Load<Texture2D>("Background/blueskyl");
-            _scoreFont = _content.Load<SpriteFont>("Fonts/game");
-            _lives3 = _content.Load<Texture2D>("Background/cloud");
-            _lives2 = _content.Load<Texture2D>("player/helicopter");
-            _lives1 = _content.Load<Texture2D>("Background/cloud");
+            _font = _content.Load<SpriteFont>("Fonts/game");
+            _lives = _content.Load<Texture2D>("objects/hearth");
         }
 
 
@@ -60,8 +56,8 @@ namespace HeliDoger.Classes
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape)) 
             {
-                Game1.gamestate.ChangeScreen(GameState.MainMenu);
-                breathingSound.Stop();
+                Game1.gamestate.ChangeScreen("menu");
+                backgroundmusic.Stop();
             }
 
             base.Update(time, mouseState);
@@ -72,7 +68,7 @@ namespace HeliDoger.Classes
             this._clouds.Update(this._player.Position);
             this._player.Move(0, gravity);
             if (_player.Lives == 0)
-                breathingSound.Stop();
+                backgroundmusic.Stop();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -82,16 +78,24 @@ namespace HeliDoger.Classes
             spriteBatch.Draw(_staticBackground, new Rectangle(Convert.ToInt32(statPos.X), 
                 Convert.ToInt32(statPos.Y), Game1.ScreenWidth, Game1.ScreenHeight), Color.White);
             base.Draw(spriteBatch);
-            spriteBatch.DrawString(_scoreFont, "coins: " + Convert.ToString( _player.Coins), 
-                new Vector2(this.Camera.Position.X + 400, this.Camera.Position.Y - 390), Color.White);
+            spriteBatch.DrawString(_font, "coins: " + Convert.ToString( _player.Coins), 
+                new Vector2(this.Camera.Position.X + 400, this.Camera.Position.Y - 390), Color.Black);
 
             if (_player.Lives == 3)
-                spriteBatch.Draw(_lives3, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 450, Convert.ToInt32(this.Camera.Position.Y) - 300, 150, 50),Color.White);
+            {
+                spriteBatch.Draw(_lives, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 450, Convert.ToInt32(this.Camera.Position.Y) - 300, 50, 50), Color.White);
+                spriteBatch.Draw(_lives, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 500, Convert.ToInt32(this.Camera.Position.Y) - 300, 50, 50), Color.White);
+                spriteBatch.Draw(_lives, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 550, Convert.ToInt32(this.Camera.Position.Y) - 300, 50, 50), Color.White);
+            }
             else if (_player.Lives == 2)
-                spriteBatch.Draw(_lives2, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 450, Convert.ToInt32(this.Camera.Position.Y) - 300, 150, 50), Color.White);
+            {
+                spriteBatch.Draw(_lives, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 450, Convert.ToInt32(this.Camera.Position.Y) - 300, 50, 50), Color.White);
+                spriteBatch.Draw(_lives, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 500, Convert.ToInt32(this.Camera.Position.Y) - 300, 50, 50), Color.White);
+            }
             else if (_player.Lives == 1)
-                spriteBatch.Draw(_lives1, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 450, Convert.ToInt32(this.Camera.Position.Y) - 300, 150, 50), Color.White);
-
+            {
+                spriteBatch.Draw(_lives, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 450, Convert.ToInt32(this.Camera.Position.Y) - 300, 50, 50), Color.White);
+            }
         }
     }
 }

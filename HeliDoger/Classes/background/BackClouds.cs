@@ -22,7 +22,7 @@ namespace HeliDoger.Classes.background
         {
             while (_xLocation <= Game1.ScreenWidth * 2)
             {
-                var obj = _factory.CreateMountain(_xLocation);
+                var obj = _factory.CreateFrontCloud(_xLocation);
                 _screen.GameObjects.Add(obj);
                 _xLocation += obj.Size.X;
             }
@@ -42,7 +42,7 @@ namespace HeliDoger.Classes.background
 
             while (_xLocation - x <= Game1.ScreenWidth * 2)
             {
-                var obj = _factory.CreateMountain(_xLocation);
+                var obj = _factory.CreateFrontCloud(_xLocation);
                 _screen.GameObjects.Add(obj);
                 _xLocation += obj.Size.X;
             }

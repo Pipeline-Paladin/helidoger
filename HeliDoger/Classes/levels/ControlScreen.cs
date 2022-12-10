@@ -38,7 +38,7 @@ namespace HeliDoger.Classes.Screens
             _back.ClickAction = () => 
             {
                 backgroundMusic.Stop();
-                Game1.gamestate.ChangeScreen(GameState.MainMenu);
+                Game1.gamestate.ChangeScreen("menu");
             };
             GameObjects.Add(_back);
         }
