@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using HeliDoger.Classes.Enemies;
 using HeliDoger.Classes.Objects;
 using HeliDoger.abstractclasses;
+using HeliDoger.Classes.background;
 
 namespace HeliDoger.Classes
 {
@@ -50,11 +51,11 @@ namespace HeliDoger.Classes
             
             if (type == 0) 
             {
-                enemy = new Jellyfish(this._content.Load<Texture2D>("enemy/AirBaloon"), x);
+                enemy = new AirBaloon(this._content.Load<Texture2D>("enemy/AirBaloon"), x);
             }
             else if (type == 1)
             {
-                enemy = new LionFish(this._content.Load<Texture2D>("enemy/bird"), x);
+                enemy = new bird(this._content.Load<Texture2D>("enemy/bird"), x);
             }
             else if (type == 2)
             {
@@ -70,15 +71,15 @@ namespace HeliDoger.Classes
 
         public GameObject CreateMountain(float x)
         {
-            return new Mountain(this._content.Load<Texture2D>("Background/cloud"), x);
+            return new Clouds(this._content.Load<Texture2D>("Background/cloud"), x);
         }
         
-        /*
-        public IGameObject CreateBottle(float x)
+        
+        public GameObject CreateCoin(float x)
         {
             int ypos = _random.Next(0,2);
-            return new Bottle(this._content.Load<Texture2D>("Objects/tank"),new Vector2(x, ypos));
+            return new coin(this._content.Load<Texture2D>("Objects/coin"),new Vector2(x, ypos));
         }
-        */
+       
     }
 }

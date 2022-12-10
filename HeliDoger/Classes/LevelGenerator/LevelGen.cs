@@ -19,8 +19,8 @@ namespace HeliDoger.Classes
         private LevelFactory _factory;
 
         private float _xLocation = -Game1.ScreenWidth;
-        private float _nextEnemy;
-        private float _nextBottle;
+        private float _Nenemy;
+        private float _Ncoin;
 
 
         public LevelGen(IScreen screen, LevelFactory factory)
@@ -37,8 +37,8 @@ namespace HeliDoger.Classes
             {
                 this.CreateBounds();
             }
-            this._nextEnemy = this._xLocation;
-            this._nextBottle = this._xLocation;
+            this._Nenemy = this._xLocation;
+            this._Ncoin = this._xLocation;
         }
 
         private void CreateBounds()
@@ -54,15 +54,15 @@ namespace HeliDoger.Classes
         {
             var factor = Convert.ToSingle((this._rand.NextDouble() + 
                 (MAX_BOTTLE_DIST - MIN_BOTTLE_DIST)) + MAX_BOTTLE_DIST);
-            this._nextBottle += factor * Game1.ScreenWidth;
+            this._Ncoin += factor * Game1.ScreenWidth;
         }
 
 
         private void NextEnemy()
         {
             var factor = Convert.ToSingle((this._rand.NextDouble() +
-                (MAX_ENEMY_DIST - MIN_ENEMY_DIST) ) + MIN_ENEMY_DIST); //making sure there are no instant enemy spawns
-            this._nextEnemy += factor * Game1.ScreenWidth;
+                (MAX_ENEMY_DIST - MIN_ENEMY_DIST) ) + MIN_ENEMY_DIST); 
+            this._Nenemy += factor * Game1.ScreenWidth;
         }
 
         public void Update(Vector2 playerPosition)
@@ -75,12 +75,12 @@ namespace HeliDoger.Classes
             while(this._xLocation - x <= Game1.ScreenWidth * 2)
             {
                 this.CreateBounds();
-                while(this._xLocation >= this._nextEnemy)
+                while(this._xLocation >= this._Nenemy)
                 {
-                    var enemy = this._factory.CreateEnemy(this._nextEnemy);
+                    var enemy = this._factory.CreateEnemy(this._Nenemy);
                     this._screen.GameObjects.Add(enemy);
-                    //var bottle = this._factory.CreateBottle(this._nextBottle);
-                    //this._screen.GameObjects.Add(bottle);
+                    var coin = this._factory.CreateCoin(this._Ncoin);
+                    this._screen.GameObjects.Add(coin);
 
                     this.NextEnemy();
                     this.NextBottle();

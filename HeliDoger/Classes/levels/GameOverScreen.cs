@@ -59,7 +59,7 @@ namespace HeliDoger.Classes.Screens
             spriteBatch.Draw(_background, new Rectangle(0, 0, 
                 Game1.ScreenWidth, Game1.ScreenHeight), Color.White);
             spriteBatch.DrawString(_scoreFont, "- GAME OVER -", new Vector2(640,300), Color.White);
-            spriteBatch.DrawString(_scoreFont, "Your score was: " + player.History.Last(), 
+            spriteBatch.DrawString(_scoreFont, "Your score was: " + player.scoins, 
                 new Vector2(620, 350), Color.White);
             spriteBatch.DrawString(_scoreFont, "Try again?", new Vector2(650,500), Color.White);
             

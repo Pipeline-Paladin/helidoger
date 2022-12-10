@@ -4,30 +4,30 @@ using Microsoft.Xna.Framework.Input;
 
 using HeliDoger.abstractclasses;
 
-namespace HeliDoger.Classes
+namespace HeliDoger.Classes.background
 {
-    public class Mountain : MovableObject
+    public class Clouds : MovableObject
     {
         private Texture2D _texture;
         private float _counterSpeed = 120;
 
-        public Mountain(Texture2D texture, float x)
+        public Clouds(Texture2D texture, float x)
         {
-            this.DrawOrder = -1;
-            this._texture = texture;
+            DrawOrder = -1;
+            _texture = texture;
 
-            this.Position = new Vector2(x, -450);
-            this.Size = new Vector2(this._texture.Bounds.Size.X, 0);
+            Position = new Vector2(x, -450);
+            Size = new Vector2(_texture.Bounds.Size.X, 0);
         }
 
         public override void Update(GameTime gameTime, MouseState mouse)
         {
-            this.Move(this._counterSpeed, 0);
+            Move(_counterSpeed, 0);
         }
 
         public override void Draw(SpriteBatch spritebatch)
         {
-            spritebatch.Draw(this._texture, this.Position, Color.White);
+            spritebatch.Draw(_texture, Position, Color.White);
         }
     }
 }

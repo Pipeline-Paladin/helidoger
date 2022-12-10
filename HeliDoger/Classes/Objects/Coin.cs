@@ -7,18 +7,18 @@ using HeliDoger.abstractclasses;
 
 namespace HeliDoger.Classes.Objects
 {
-    class Bottle : IStaticObject
+    class coin : IStaticObject
     {
         private Texture2D _texture;
         private float _speed= 0;
         public static float Weight { get; private set; } = 5f;
 
-        public Bottle(Texture2D texture, Vector2 pos) 
+        public coin(Texture2D texture, Vector2 pos) 
         {
             this._texture = texture;
             this.Position = pos;
             this.Size = this._texture.Bounds.Size.ToVector2();
-            this.DrawOrder = 10;    // ALWAYS in the front;
+            this.DrawOrder = 10;   
         }
 
         public override void Update(GameTime gameTime, MouseState mouse)

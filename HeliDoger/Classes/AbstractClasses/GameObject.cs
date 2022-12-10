@@ -14,7 +14,7 @@ namespace HeliDoger.abstractclasses
 
         private Vector2 _movement = Vector2.Zero;
 
-        protected void Move(float x, float y)
+        public void Move(float x, float y)
         {
             this.Move(new Vector2(x, y));
         }

@@ -16,11 +16,11 @@ namespace HeliDoger
     {
         Texture2D _Texture;
         public Animation Animation { get; set; }
-        private float _breathingF = 0f;
+
         private float _speed = 300;
       
         public int Coins { get; private set; } = 0;
-        public static List<int> History { get; private set; } = new List<int>();
+        public static int scoins { get; private set; }
         public int Lives { get; private set; } = 3;
         private bool _invincible = false;
 
@@ -44,6 +44,7 @@ namespace HeliDoger
 
         public override void Update(GameTime gameTime, MouseState mouse)
         {
+            scoins = Coins;
             KeyboardState keyboard = Keyboard.GetState();
 
             // Update sprite
@@ -82,11 +83,11 @@ namespace HeliDoger
 
                 if (this.Lives == 0) 
                 {
-                    History.Add(this.Coins);
+                    
                     Game1.gamestate.ChangeScreen(GameState.GameOver);
                 }
             }
-            if (gameObject is Bottle) 
+            if (gameObject is coin) 
             {
                 if (this._invincible) 
                     this._invincible = false;
@@ -98,7 +99,7 @@ namespace HeliDoger
         public override void Draw(SpriteBatch spriteBatch)
         {
             var pos = this.Position;
-            pos += new Vector2(0f, _breathingF);
+          
 
             if (!this._invincible) 
             {
@@ -115,9 +116,9 @@ namespace HeliDoger
         }
         public void IncrementSpeed() 
         {
-            if(Coins > 3)
-                this._speed = Coins * 80;
-            this.Move(0, Coins * Bottle.Weight);
+            
+            this._speed = (Coins +10)* 80;
+            this.Move(0, Coins * coin.Weight);
         }
 
     }

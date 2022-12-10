@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using HeliDoger.abstractclasses;
 using SharpDX.Direct2D1;
 using SpriteBatch = Microsoft.Xna.Framework.Graphics.SpriteBatch;
+using HeliDoger.Classes.background;
 
 namespace HeliDoger.Classes
 {
@@ -26,7 +27,8 @@ namespace HeliDoger.Classes
 
         private player _player;
         private LevelGen _generator;
-        private Mountains _mountains;
+        private BackClouds _clouds;
+        private int gravity = 80;
 
         public MainGame(ContentManager content) : base(content)
         {
@@ -34,7 +36,7 @@ namespace HeliDoger.Classes
 
             var factory = new LevelFactory(content);
             this._generator = new LevelGen(this, factory);
-            this._mountains = new Mountains(this, factory);
+            this._clouds = new BackClouds(this, factory);
         }
 
         public override void InitializeObjects()
@@ -67,7 +69,8 @@ namespace HeliDoger.Classes
             this.Camera.Position = new Vector2(_player.Position.X + Game1.ScreenWidth 
                 / 2 - 0f * _player.Size.X, 0f);
             this._generator.Update(this._player.Position);
-            this._mountains.Update(this._player.Position);
+            this._clouds.Update(this._player.Position);
+            this._player.Move(0, gravity);
             if (_player.Lives == 0)
                 breathingSound.Stop();
         }
@@ -79,7 +82,7 @@ namespace HeliDoger.Classes
             spriteBatch.Draw(_staticBackground, new Rectangle(Convert.ToInt32(statPos.X), 
                 Convert.ToInt32(statPos.Y), Game1.ScreenWidth, Game1.ScreenHeight), Color.White);
             base.Draw(spriteBatch);
-            spriteBatch.DrawString(_scoreFont, "coins: " + _player.Coins, 
+            spriteBatch.DrawString(_scoreFont, "coins: " + Convert.ToString( _player.Coins), 
                 new Vector2(this.Camera.Position.X + 400, this.Camera.Position.Y - 390), Color.White);
 
             if (_player.Lives == 3)
