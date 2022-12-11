@@ -6,7 +6,7 @@ using HeliDoger.abstractclasses;
 
 namespace HeliDoger.Classes
 {
-    public class Wall : IStaticObject
+    public class Wall : StaticObject
     {
         private Texture2D _texture;
 

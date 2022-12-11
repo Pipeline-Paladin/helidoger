@@ -9,7 +9,7 @@ using HeliDoger.abstractclasses;
 
 namespace HeliDoger.Classes.Screens
 {
-    class ControlScreen : IScreen
+    class InfoScreen : Screen
     {
         #region TexturesAndSounds
         private SoundEffect _sound;
@@ -19,7 +19,7 @@ namespace HeliDoger.Classes.Screens
 
         private Button _back;
 
-        public ControlScreen(ContentManager content) : base(content)
+        public InfoScreen(ContentManager content) : base(content)
         {
             Game1.gamestate.IsMouseVisible = true;
         }

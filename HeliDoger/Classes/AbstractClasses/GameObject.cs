@@ -56,7 +56,7 @@ namespace HeliDoger.abstractclasses
 
         public virtual bool IsColliding(GameObject gameObject, GameTime time)
         {
-            var bounds = this.GetBounds(time);  //CChineseNaam
+            var bounds = this.GetBounds(time);   
             return !Rectangle.Intersect(bounds, gameObject.GetBounds(time)).IsEmpty;
         }
     }

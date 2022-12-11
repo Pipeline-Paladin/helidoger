@@ -1,5 +1,4 @@
 ﻿using System;
-using HeliDoger;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -10,10 +9,11 @@ using HeliDoger.abstractclasses;
 using SharpDX.Direct2D1;
 using SpriteBatch = Microsoft.Xna.Framework.Graphics.SpriteBatch;
 using HeliDoger.Classes.background;
-
+using HeliDoger.Classes.Enemies;
+using HeliDoger.Classes.player;
 namespace HeliDoger.Classes
 {
-    class MainGame : IScreen
+    class MainGame : Screen
     {
      
         private Texture2D _staticBackground;
@@ -23,17 +23,19 @@ namespace HeliDoger.Classes
         SoundEffectInstance backgroundmusic;
     
 
-        private player _player;
+        private MainPlayer _player;
         private LevelGen _generator;
         private BackClouds _clouds;
         private int gravity = 80;
 
-        public MainGame(ContentManager content) : base(content)
+    
+        public MainGame(ContentManager content, int enemydif, int powerdiff ,int coindiff) : base(content)
         {
+           
             Game1.gamestate.IsMouseVisible = false;
 
-            var factory = new LevelFactory(content);
-            this._generator = new LevelGen(this, factory);
+            var factory = new ReturnFactory(content);
+            this._generator = new LevelGen(this, factory, enemydif, powerdiff ,coindiff);
             this._clouds = new BackClouds(this, factory);
         }
 
@@ -43,7 +45,8 @@ namespace HeliDoger.Classes
             backgroundmusic = _sound.CreateInstance();
             backgroundmusic.IsLooped = true;
             backgroundmusic.Play();
-            _player = new player(_content.Load<Texture2D>("player/helicopter"), 2);
+
+            _player = new MainPlayer(_content.Load<Texture2D>("player/helicopter"));
             GameObjects.Add(_player);
 
             _staticBackground = _content.Load<Texture2D>("Background/blueskyl");

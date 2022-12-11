@@ -7,7 +7,7 @@ using System.Text;
 
 namespace HeliDoger.abstractclasses
 {
-    public abstract class IStaticObject : GameObject
+    public abstract class StaticObject : GameObject
     {
 
         public override Rectangle GetBounds()
@@ -29,7 +29,7 @@ namespace HeliDoger.abstractclasses
 
         public override bool IsColliding(GameObject gameObject, GameTime time)
         {
-            var bounds = this.GetBounds(time);  //CChineseNaam
+            var bounds = this.GetBounds(time);   
             return !Rectangle.Intersect(bounds, gameObject.GetBounds(time)).IsEmpty;
         }
 

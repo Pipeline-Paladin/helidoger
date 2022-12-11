@@ -8,7 +8,7 @@ using HeliDoger.abstractclasses;
 
 namespace HeliDoger
 {
-    public class Button : IStaticObject
+    public class Button : StaticObject
     {
         private Texture2D _buttonTexture;
         private Rectangle _buttonRectangle;

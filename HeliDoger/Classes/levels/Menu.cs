@@ -9,7 +9,7 @@ using HeliDoger.abstractclasses;
 
 namespace HeliDoger.Classes
 {
-    class Menu : IScreen
+    class Menu : Screen
     {
         #region TexturesAndSounds
         private Texture2D _backgroundTexture;
@@ -19,7 +19,7 @@ namespace HeliDoger.Classes
         private Button _play;
         private Button _controls;
         private Button _exit;
-        
+       
 
         public Menu(ContentManager content) : base(content)
         {
@@ -33,20 +33,20 @@ namespace HeliDoger.Classes
             backgroundMusic.IsLooped = true;
             backgroundMusic.Play();
 
-            _controls = new Button(_content.Load<Texture2D>("Button/info"), 
-                new Rectangle(0, 200, 300, 100));
+            _controls = new Button(_content.Load<Texture2D>("Button/level1"), 
+                new Rectangle(0, 50, 300, 100));
             _controls.ClickAction = () =>
             {
                 backgroundMusic.Stop();
-                Game1.gamestate.ChangeScreen("info");
+                Game1.gamestate.ChangeScreen("play", Game1.enemydiff, Game1.powerdiff, Game1.coindiff);
             };
 
-            _play = new Button(_content.Load<Texture2D>("Button/start"), 
-                new Rectangle(0, 50, 300, 100));
+            _play = new Button(_content.Load<Texture2D>("Button/level2"), 
+                new Rectangle(0, 200, 300, 100));
             _play.ClickAction = () =>
             {
                 backgroundMusic.Stop();
-                Game1.gamestate.ChangeScreen("play");
+                Game1.gamestate.ChangeScreen("play", Game1.enemydiff - 3, Game1.powerdiff + 10 , Game1.coindiff - 4);
             };
 
             _exit = new Button(_content.Load<Texture2D>("Button/back"), 

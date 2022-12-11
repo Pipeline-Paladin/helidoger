@@ -8,23 +8,26 @@ namespace HeliDoger.Classes
 {
     public class LevelGen 
     {
-     
-
-   
         private Random _rand;
-
-        private IScreen _screen;
-        private LevelFactory _factory;
+        private Screen _screen;
+        private ReturnFactory _factory;
 
         private float _xScreenWidth = -Game1.ScreenWidth;
         private float _Nenemy;
         private float _Ncoin;
         private float _Npower;
-
-        public LevelGen(IScreen screen, LevelFactory factory)
+        private int _enemydiff;
+        private int _powerdiff;
+        private int _coindiff;
+        public LevelGen(Screen screen, ReturnFactory factory, int enemydiff, int powerdiff, int coindiff)
         {
             this._screen = screen;
             this._factory = factory;
+
+            _enemydiff = enemydiff;
+            _powerdiff = powerdiff;
+            _coindiff = coindiff;
+
             this._rand = new Random();
             this.Init();
         }
@@ -50,18 +53,18 @@ namespace HeliDoger.Classes
 
         private void NextCoin()
         {
-            var factor = Convert.ToSingle((this._rand.NextDouble() + 5));
+            var factor = Convert.ToSingle((this._rand.NextDouble() + _coindiff));
             this._Ncoin += factor * Game1.ScreenWidth;
         }
         private void NextPowerup()
         {
-            var factor = Convert.ToSingle((this._rand.NextDouble() + 14));
+            var factor = Convert.ToSingle((this._rand.NextDouble() + _powerdiff));
             this._Npower += factor * Game1.ScreenWidth;
         }
 
         private void NextEnemy()
         {
-            var space = Convert.ToSingle((this._rand.NextDouble() +1.5)); 
+            var space = Convert.ToSingle((this._rand.NextDouble() + _enemydiff)); 
             this._Nenemy += space * Game1.ScreenWidth;
         }
 
@@ -72,24 +75,26 @@ namespace HeliDoger.Classes
 
         private void Update(float x) 
         {
-            while(this._xScreenWidth - x <= Game1.ScreenWidth * 2)
-            {
+           
                 this.CreateBounds();
                 while(this._xScreenWidth >= this._Nenemy)
                 {
                     var enemy = this._factory.CreateEnemy(this._Nenemy);
-                    this._screen.GameObjects.Add(enemy);
                     var coin = this._factory.CreateCoin(this._Ncoin);
-                    this._screen.GameObjects.Add(coin);
                     var powerup = this._factory.CreatePowerup(this._Npower);
+                   
+                    this._screen.GameObjects.Add(enemy);
+                    this._screen.GameObjects.Add(coin);
                     this._screen.GameObjects.Add(powerup);
-
                     this.NextEnemy();
                     this.NextCoin();
                     this.NextPowerup();
                 }
-            }
-            this._screen.GameObjects.RemoveAll(obj => x - obj.Position.X >= Game1.ScreenWidth * 2);
+            
+          
+               this._screen.GameObjects.RemoveAll(obj => x - obj.Position.X >= Game1.ScreenWidth * 2);
+         
+           
         }
     }
 }

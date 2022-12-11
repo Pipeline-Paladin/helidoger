@@ -14,7 +14,7 @@ namespace HeliDoger.Classes.Enemies
         {
             this._texture = texture;
             this.Size = this._texture.Bounds.Size.ToVector2() * 0.3f;
-            int ypos = random.Next(-100, 250);
+            int ypos = random.Next(-50, 250);
             this.DrawOrder = 0;
             this.Position = new Vector2(x, ypos);
         }

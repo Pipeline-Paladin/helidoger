@@ -14,8 +14,9 @@ namespace HeliDoger
         private SpriteBatch _spriteBatch;     
         public static Game1 gamestate { get; private set; }
 
-        public static int ScreenWidth { get; private set; } = 1422;
-        public static int ScreenHeight { get; private set; } = 800;
+        public static int enemydiff = 4;
+        public static int powerdiff = 10;
+        public static int coindiff = 7;
 
         public Game1()
         {
@@ -30,8 +31,9 @@ namespace HeliDoger
             _gameScreen = new Menu(Content);
         }
 
-      
-       
+
+        public static int ScreenWidth = 1422;
+        public static int ScreenHeight = 800;
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -65,8 +67,8 @@ namespace HeliDoger
                 _newGameScreen = null;
             }
         }
-        private IScreen _gameScreen;
-        private IScreen _newGameScreen;
+        private Screen _gameScreen;
+        private Screen _newGameScreen;
         public void ChangeScreen(string newscreen)
         {
             switch (newscreen)
@@ -74,16 +76,24 @@ namespace HeliDoger
                 case "menu":
                     _newGameScreen = new Menu(Content);
                     break;
-                case "play":
-                    _newGameScreen = new MainGame(Content);
-                    break;
+                
                 case "info":
-                    _newGameScreen = new ControlScreen(Content);
+                    _newGameScreen = new InfoScreen(Content);
                     break;
                 case "death":
-                    _newGameScreen = new GameOverScreen(Content);
+                    _newGameScreen = new DeathScreen(Content);
                     break;
               
+            }
+        }
+        public void ChangeScreen(string newscreen, int enemydif, int powerdiff, int coindiff)
+        {
+            switch (newscreen)
+            {
+                case "play":
+                    _newGameScreen = new MainGame(Content , enemydif, powerdiff, coindiff);
+                    break;
+
             }
         }
     }

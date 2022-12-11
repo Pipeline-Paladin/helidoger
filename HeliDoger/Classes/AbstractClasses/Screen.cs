@@ -9,14 +9,14 @@ using HeliDoger.Classes.Objects;
 
 namespace HeliDoger.abstractclasses
 {
-    public abstract class IScreen
+    public abstract class Screen
     {
         public Camera Camera { get; private set; }
 
         public List<GameObject> GameObjects { get; protected set; }
         protected ContentManager _content;
 
-        public IScreen(ContentManager content)
+        public Screen(ContentManager content)
         {
             this.Camera = new Camera();
 

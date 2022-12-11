@@ -57,3 +57,7 @@ C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content
 C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\objects\coin.xnb
 C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\Music\DeathEffect.xnb
 C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\objects\hearth.xnb
+C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\objects\star.xnb
+C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\objects\SlowDown.xnb
+C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\Button\level1.xnb
+C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\Button\level2.xnb

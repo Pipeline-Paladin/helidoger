@@ -6,11 +6,11 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 
 using HeliDoger.abstractclasses;
-using HeliDoger;
+using HeliDoger.Classes.player;
 
 namespace HeliDoger.Classes.Screens
 {
-    class GameOverScreen : IScreen
+    class DeathScreen : Screen
     {
         #region TexturesAndSounds
         private Texture2D _background;
@@ -21,7 +21,7 @@ namespace HeliDoger.Classes.Screens
         private Button _yes;
         private Button _no;
 
-        public GameOverScreen(ContentManager content) : base(content)
+        public DeathScreen(ContentManager content) : base(content)
         {
             Game1.gamestate.IsMouseVisible = true;
         }
@@ -35,13 +35,13 @@ namespace HeliDoger.Classes.Screens
             
             _yes = new Button(_content.Load<Texture2D>("Button/start"), 
                 new Rectangle(400, 600, 150, 100));
-            _yes.ClickAction = () => Game1.gamestate.ChangeScreen("play");
+            _yes.ClickAction = () => Game1.gamestate.ChangeScreen("play", Game1.enemydiff,Game1.powerdiff,Game1.coindiff);
 
 
             GameObjects.Add(_yes);
 
-            _no = new Button(_content.Load<Texture2D>("Button/info"), 
-                new Rectangle(850, 600, 150, 100));
+            _no = new Button(_content.Load<Texture2D>("Button/back"), 
+                new Rectangle(850, 600, 200, 100));
             _no.ClickAction = () => Game1.gamestate.ChangeScreen("menu");
 
             GameObjects.Add(_no);
@@ -58,10 +58,10 @@ namespace HeliDoger.Classes.Screens
         {
             spriteBatch.Draw(_background, new Rectangle(0, 0, 
                 Game1.ScreenWidth, Game1.ScreenHeight), Color.White);
-            spriteBatch.DrawString(_scoreFont, "- GAME OVER -", new Vector2(640,300), Color.White);
-            spriteBatch.DrawString(_scoreFont, "Your score: " + player.scoins, 
-                new Vector2(620, 350), Color.White);
-            spriteBatch.DrawString(_scoreFont, "Try again?", new Vector2(650,500), Color.White);
+            spriteBatch.DrawString(_scoreFont, "- GAME OVER -", new Vector2(Game1.ScreenWidth / 3,300), Color.White);
+            spriteBatch.DrawString(_scoreFont, "Your score: " + MainPlayer.scoins, 
+                new Vector2(Game1.ScreenWidth / 3, 350), Color.White);
+            spriteBatch.DrawString(_scoreFont, "Try again?", new Vector2(Game1.ScreenWidth / 3, 500), Color.White);
             
             base.Draw(spriteBatch);
         }

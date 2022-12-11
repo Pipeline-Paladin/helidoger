@@ -7,11 +7,11 @@ using HeliDoger.abstractclasses;
 
 namespace HeliDoger.Classes.Objects
 {
-    class coin : IStaticObject
+    class coin : StaticObject
     {
         private Texture2D _texture;
         private float _speed= 0;
-        public static float Weight { get; private set; } = 5f;
+       
 
         public coin(Texture2D texture, Vector2 pos) 
         {
