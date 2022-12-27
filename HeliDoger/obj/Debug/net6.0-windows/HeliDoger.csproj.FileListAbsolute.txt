@@ -61,3 +61,4 @@ C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content
 C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\objects\SlowDown.xnb
 C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\Button\level1.xnb
 C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\Button\level2.xnb
+C:\Users\vanoe\source\repos\HeliDoger\HeliDoger\bin\Debug\net6.0-windows\Content\BackGround\NightSky.xnb

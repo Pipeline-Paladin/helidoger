@@ -10,8 +10,9 @@ namespace HeliDoger.Classes
     {
         private Random _rand;
         private Screen _screen;
-        private ReturnFactory _factory;
-
+        private MainLevelFactory _factory;
+        
+        private FactoryPowerup _factoryPowerup;
         private float _xScreenWidth = -Game1.ScreenWidth;
         private float _Nenemy;
         private float _Ncoin;
@@ -19,7 +20,7 @@ namespace HeliDoger.Classes
         private int _enemydiff;
         private int _powerdiff;
         private int _coindiff;
-        public LevelGen(Screen screen, ReturnFactory factory, int enemydiff, int powerdiff, int coindiff)
+        public LevelGen(Screen screen, MainLevelFactory factory, int enemydiff, int powerdiff, int coindiff)
         {
             this._screen = screen;
             this._factory = factory;
@@ -75,9 +76,13 @@ namespace HeliDoger.Classes
 
         private void Update(float x) 
         {
-           
+            //check width to posistion for saving frames
+
+            while(this._xScreenWidth - x <= Game1.ScreenWidth * 2)
+            {
                 this.CreateBounds();
-                while(this._xScreenWidth >= this._Nenemy)
+                //check width to nierest enemy
+                while (this._xScreenWidth >= this._Nenemy)
                 {
                     var enemy = this._factory.CreateEnemy(this._Nenemy);
                     var coin = this._factory.CreateCoin(this._Ncoin);
@@ -90,9 +95,9 @@ namespace HeliDoger.Classes
                     this.NextCoin();
                     this.NextPowerup();
                 }
-            
-          
-               this._screen.GameObjects.RemoveAll(obj => x - obj.Position.X >= Game1.ScreenWidth * 2);
+            }
+            //remove obectes off screen
+            this._screen.GameObjects.RemoveAll(obj => x - obj.Position.X >= Game1.ScreenWidth * 2);
          
            
         }

@@ -21,13 +21,13 @@ namespace HeliDoger.Classes.player
         public Animation Animation { get; set; }
 
         private float _Playerspeed = 300;
-
+        public static MainPlayer player { get; private set; }
         public int Coins { get; private set; } = 0;
         public static int scoins { get; private set; }
-        public int Lives { get; private set; } = 3;
-        private bool _invincible = false;
-        private int _invicibleTime = 0;
-        public int _SetInvincibleTime = 120;
+        public int Lives { get;  set; } = 3;
+        public bool _invincible = false;
+        public int _invicibleTime = 0;
+     
         public bool _timeslow = false;
         public int _slowdowntime = 200;
  
@@ -50,11 +50,10 @@ namespace HeliDoger.Classes.player
                 _slowdowntime--;
             }
 
-            double time = gameTime.ElapsedGameTime.TotalSeconds;
-
         }
         public MainPlayer(Texture2D texture) : base()
         {
+            player = this;
             DrawOrder = 5;
             Position = new Vector2(0, 0);
 
@@ -69,7 +68,7 @@ namespace HeliDoger.Classes.player
             Size = Animation.CurrentFrame.OriginRectangle.Size.ToVector2() * 0.6f;
         }
 
-
+    
 
         public override void Update(GameTime gameTime, MouseState mouse)
         {
@@ -78,15 +77,16 @@ namespace HeliDoger.Classes.player
             Animation.Update(gameTime);
             Position += new Vector2(_Playerspeed, 0f) * Convert.ToSingle(gameTime.ElapsedGameTime.TotalSeconds);
 
+            // more animation update when swimming up or down
             if (keyboard.IsKeyDown(Keys.Down))
             {
-                Animation.Update(gameTime); // more animation update when swimming up or down
-                Move(0, _Playerspeed);
+                Animation.Update(gameTime); 
+                Move(0, _Playerspeed-100);
             }
             else if (keyboard.IsKeyDown(Keys.Up))
             {
                 Animation.Update(gameTime);
-                Move(0, -_Playerspeed);
+                Move(0, -_Playerspeed+100);
             }
             timer(gameTime);
 
@@ -99,21 +99,7 @@ namespace HeliDoger.Classes.player
         {
             if (gameObject is Wall)
                 base.OnCollision(gameObject);
-            if (gameObject is Enemy)
-            {
-                if (!_invincible)
-                {
-                    Lives -= 1;
-                    _invincible = true;
-                    _invicibleTime = _SetInvincibleTime;
-
-                }
-
-                if (Lives == 0)
-                {
-                    Game1.gamestate.ChangeScreen("death");
-                }
-            }
+            
             if (gameObject is coin)
             {
                 Coins += 1;
@@ -132,17 +118,14 @@ namespace HeliDoger.Classes.player
             if (gameObject is invincebillityPowerup)
             {
                 _invincible = true;
-                _invicibleTime = _SetInvincibleTime;
+                _invicibleTime = 120;
                 gameObject.Position = Vector2.Zero;
             }
             if (gameObject is SlowDownPower)
             {
                 if (scoins > 0)
                 {
-                  
                         _timeslow = true;
-                    
-                    
                     gameObject.Position = Vector2.Zero;
                 }
                
@@ -169,8 +152,6 @@ namespace HeliDoger.Classes.player
         }
         public void IncrementSpeed()
         {
-
-            
             if (_timeslow)
             {
                 _Playerspeed = (Coins+1) * 60;
@@ -179,7 +160,7 @@ namespace HeliDoger.Classes.player
             {
                 _Playerspeed = (Coins + 10) * 80;
             }
-            Move(0, (Coins * 5 ));
+            Move(0, (Coins * 2 ));
         }
 
     }

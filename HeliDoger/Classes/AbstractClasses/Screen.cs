@@ -30,23 +30,23 @@ namespace HeliDoger.abstractclasses
 
         public virtual void Update(GameTime time, MouseState mouse)
         {
-            foreach (var go in GameObjects)
+            foreach (var i in GameObjects)
             {
-                go.Update(time, mouse);
+                i.Update(time, mouse);
             }
 
-            foreach (var go1 in this.GameObjects)
+            foreach (var i in this.GameObjects)
             {
-                if (go1 is Wall) continue;
+                if (i is Wall) continue;
 
-                foreach (var go2 in GameObjects)
+                foreach (var j in GameObjects)
                 {
-                    if (go1 == go2) continue;
-                    var collided = go1.IsColliding(go2, time);
+                    if (i == j) continue;
+                    var collided = i.IsColliding(j, time);
                     if (collided)
                     {
-                        go1.OnCollision(go2);
-                        go2.OnCollision(go1);
+                        i.OnCollision(j);
+                        j.OnCollision(i);
                     }
                 }
             }
@@ -59,9 +59,9 @@ namespace HeliDoger.abstractclasses
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            foreach (var go in GameObjects.OrderBy(x => x.DrawOrder))
+            foreach (var i in GameObjects.OrderBy(x => x.DrawOrder))
             {
-                go.Draw(spriteBatch);
+                i.Draw(spriteBatch);
             }
         }
 

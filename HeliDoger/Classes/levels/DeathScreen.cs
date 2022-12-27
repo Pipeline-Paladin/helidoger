@@ -34,14 +34,14 @@ namespace HeliDoger.Classes.Screens
             _background = _content.Load<Texture2D>("BackGround/blueskyl");
             
             _yes = new Button(_content.Load<Texture2D>("Button/start"), 
-                new Rectangle(400, 600, 150, 100));
-            _yes.ClickAction = () => Game1.gamestate.ChangeScreen("play", Game1.enemydiff,Game1.powerdiff,Game1.coindiff);
+                new Rectangle(400, 600, 200, 100));
+            _yes.ClickAction = () => Game1.gamestate.ChangeScreen("play", Game1.enemydiff,Game1.powerdiff,Game1.coindiff, true);
 
 
             GameObjects.Add(_yes);
 
             _no = new Button(_content.Load<Texture2D>("Button/back"), 
-                new Rectangle(850, 600, 200, 100));
+                new Rectangle(850, 600, 300, 100));
             _no.ClickAction = () => Game1.gamestate.ChangeScreen("menu");
 
             GameObjects.Add(_no);

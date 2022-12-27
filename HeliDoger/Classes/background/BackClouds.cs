@@ -8,10 +8,10 @@ namespace HeliDoger.Classes.background
     public class BackClouds
     {
         private Screen _screen;
-        private ReturnFactory _factory;
+        private MainLevelFactory _factory;
         private float _xLocation = -Game1.ScreenWidth * 2;
 
-        public BackClouds(Screen screen, ReturnFactory factory)
+        public BackClouds(Screen screen, MainLevelFactory factory)
         {
             _screen = screen;
             _factory = factory;

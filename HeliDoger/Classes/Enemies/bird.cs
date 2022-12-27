@@ -27,9 +27,7 @@ namespace HeliDoger.Classes.Enemies
             {
                 _Animation.AddFrame(new AnimationFrame(new Rectangle(i * 260, 0, 260, 300)));
             }
-
         }
-
         public override void Update(GameTime gameTime, MouseState mouse)
         {
             this.Move(-this._speed, 0f);
@@ -41,6 +39,5 @@ namespace HeliDoger.Classes.Enemies
             spriteBatch.Draw(this._texture, this.Position, _Animation.CurrentFrame.OriginRectangle, 
                 Color.Red, 0f, Vector2.Zero, 0.3f, SpriteEffects.None, 0f);
         }
-
     }
 }

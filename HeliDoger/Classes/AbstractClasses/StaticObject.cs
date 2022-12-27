@@ -23,10 +23,6 @@ namespace HeliDoger.abstractclasses
             return bounds;
         }
 
-        public override void OnCollision(GameObject gameObject)
-        {
-        }
-
         public override bool IsColliding(GameObject gameObject, GameTime time)
         {
             var bounds = this.GetBounds(time);   

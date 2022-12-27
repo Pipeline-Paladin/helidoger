@@ -29,14 +29,23 @@ namespace HeliDoger.Classes
         private int gravity = 80;
 
     
-        public MainGame(ContentManager content, int enemydif, int powerdiff ,int coindiff) : base(content)
+        public MainGame(ContentManager content, int enemydif, int powerdiff ,int coindiff,bool day) : base(content)
         {
            
             Game1.gamestate.IsMouseVisible = false;
 
-            var factory = new ReturnFactory(content);
+            var factory = new MainLevelFactory(content);
             this._generator = new LevelGen(this, factory, enemydif, powerdiff ,coindiff);
             this._clouds = new BackClouds(this, factory);
+            //background change
+            if (day)
+            {
+            _staticBackground = _content.Load<Texture2D>("Background/blueskyl");
+            }
+            else
+            {
+                _staticBackground = _content.Load<Texture2D>("Background/Nightsky");
+            }
         }
 
         public override void InitializeObjects()
@@ -49,7 +58,7 @@ namespace HeliDoger.Classes
             _player = new MainPlayer(_content.Load<Texture2D>("player/helicopter"));
             GameObjects.Add(_player);
 
-            _staticBackground = _content.Load<Texture2D>("Background/blueskyl");
+            
             _font = _content.Load<SpriteFont>("Fonts/game");
             _lives = _content.Load<Texture2D>("objects/hearth");
         }
@@ -57,6 +66,8 @@ namespace HeliDoger.Classes
 
         public override void Update(GameTime time, MouseState mouseState)
         {
+            this._player.Move(0, gravity);
+
             if (Keyboard.GetState().IsKeyDown(Keys.Escape)) 
             {
                 Game1.gamestate.ChangeScreen("menu");
@@ -69,7 +80,7 @@ namespace HeliDoger.Classes
                 / 2 - 0f * _player.Size.X, 0f);
             this._generator.Update(this._player.Position);
             this._clouds.Update(this._player.Position);
-            this._player.Move(0, gravity);
+           
             if (_player.Lives == 0)
                 backgroundmusic.Stop();
         }
@@ -84,20 +95,12 @@ namespace HeliDoger.Classes
             spriteBatch.DrawString(_font, "coins: " + Convert.ToString( _player.Coins), 
                 new Vector2(this.Camera.Position.X + 400, this.Camera.Position.Y - 390), Color.Black);
 
-            if (_player.Lives == 3)
+      
+            int x = 450;
+            for (int i = 0; i < _player.Lives; i++)
             {
-                spriteBatch.Draw(_lives, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 450, Convert.ToInt32(this.Camera.Position.Y) - 300, 50, 50), Color.White);
-                spriteBatch.Draw(_lives, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 500, Convert.ToInt32(this.Camera.Position.Y) - 300, 50, 50), Color.White);
-                spriteBatch.Draw(_lives, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 550, Convert.ToInt32(this.Camera.Position.Y) - 300, 50, 50), Color.White);
-            }
-            else if (_player.Lives == 2)
-            {
-                spriteBatch.Draw(_lives, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 450, Convert.ToInt32(this.Camera.Position.Y) - 300, 50, 50), Color.White);
-                spriteBatch.Draw(_lives, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 500, Convert.ToInt32(this.Camera.Position.Y) - 300, 50, 50), Color.White);
-            }
-            else if (_player.Lives == 1)
-            {
-                spriteBatch.Draw(_lives, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + 450, Convert.ToInt32(this.Camera.Position.Y) - 300, 50, 50), Color.White);
+                spriteBatch.Draw(_lives, new Rectangle(Convert.ToInt32(this.Camera.Position.X) + x, Convert.ToInt32(this.Camera.Position.Y) - 300, 50, 50), Color.White);
+                x = x + 50;
             }
         }
     }

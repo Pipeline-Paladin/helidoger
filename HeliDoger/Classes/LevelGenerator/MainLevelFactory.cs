@@ -14,11 +14,11 @@ using HeliDoger.Classes.Objects.Powerups;
 
 namespace HeliDoger.Classes
 {
-    public class ReturnFactory 
+    public class MainLevelFactory 
     {//factory patren
         private ContentManager _content;
         private Random _random = new Random();
-        public ReturnFactory(ContentManager content)
+        public MainLevelFactory(ContentManager content)
         {
             this._content = content; 
         }
@@ -32,14 +32,12 @@ namespace HeliDoger.Classes
                 case 0:
                     enemy = new AirBaloon(this._content.Load<Texture2D>("enemy/AirBaloon"), x); ;
                     break;
-
                 case 1:
                     enemy = new bird(this._content.Load<Texture2D>("enemy/bird"), x);
                     break;
                 case 2:
                     enemy = new Tree(this._content.Load<Texture2D>("enemy/tree"), x);
-                    break;
-          
+                    break;          
             }
             return enemy;
         }

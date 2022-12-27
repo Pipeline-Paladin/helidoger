@@ -11,10 +11,9 @@ namespace HeliDoger.Classes
 {
     class Menu : Screen
     {
-        #region TexturesAndSounds
+      
         private Texture2D _backgroundTexture;
         private SoundEffect _sound;
-        #endregion
 
         private Button _play;
         private Button _controls;
@@ -38,7 +37,7 @@ namespace HeliDoger.Classes
             _controls.ClickAction = () =>
             {
                 backgroundMusic.Stop();
-                Game1.gamestate.ChangeScreen("play", Game1.enemydiff, Game1.powerdiff, Game1.coindiff);
+                Game1.gamestate.ChangeScreen("play", Game1.enemydiff, Game1.powerdiff, Game1.coindiff,true);
             };
 
             _play = new Button(_content.Load<Texture2D>("Button/level2"), 
@@ -46,18 +45,13 @@ namespace HeliDoger.Classes
             _play.ClickAction = () =>
             {
                 backgroundMusic.Stop();
-                Game1.gamestate.ChangeScreen("play", Game1.enemydiff - 3, Game1.powerdiff + 10 , Game1.coindiff - 4);
+                Game1.gamestate.ChangeScreen("play", Game1.enemydiff - 3, Game1.powerdiff + 10 , Game1.coindiff - 4,false);
             };
 
             _exit = new Button(_content.Load<Texture2D>("Button/back"), 
-                new Rectangle(1100, 200, 300, 100));
+                new Rectangle(0, 500, 300, 100));
             _exit.ClickAction = () => Game1.gamestate.Exit();
-
-          
-
             _backgroundTexture = _content.Load<Texture2D>("BackGround/BackgroundMenu");
-
-
             GameObjects.Add(_controls);
             GameObjects.Add(_play);
             GameObjects.Add(_exit);

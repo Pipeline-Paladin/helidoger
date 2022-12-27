@@ -1,7 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HeliDoger.Classes.player;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,7 +19,20 @@ namespace HeliDoger.abstractclasses
 
         public override void OnCollision(GameObject gameObject)
         {
-            
+
+            if (gameObject is MainPlayer)
+            {
+                if (!MainPlayer.player._invincible)
+                {
+                    MainPlayer.player.Lives -= 1;
+                    MainPlayer.player._invincible = true;
+                    MainPlayer.player._invicibleTime = 120; ;
+                }
+                if (MainPlayer.player.Lives == 0)
+                {
+                    Game1.gamestate.ChangeScreen("death");
+                }
+            }
         }
     }
 }

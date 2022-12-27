@@ -12,14 +12,6 @@ namespace HeliDoger.abstractclasses
 
         private Vector2 _movement = Vector2.Zero;
 
-        public override void Update(GameTime gameTime, MouseState mouse)
-        {
-        }
-
-        public override void Draw(SpriteBatch spritebatch)
-        {
-        }
-
         public new void LateUpdate(GameTime gameTime)
         {
             this.Position += this._movement * Convert.ToSingle(gameTime.ElapsedGameTime.TotalSeconds);
