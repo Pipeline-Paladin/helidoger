@@ -2,11 +2,11 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-using HeliDoger.Interfaces;
+using HeliDoger.abstractclasses;
 
 namespace HeliDoger.Classes
 {
-    public class Wall : IStaticObject
+    public class Wall : StaticObject
     {
         private Texture2D _texture;
 

@@ -2,7 +2,7 @@
 
 namespace HeliDoger.Animations
 {
-    class AnimationFrame        //source: video of the teacher on digitap
+    class AnimationFrame       
     {
         public Rectangle OriginRectangle { get; set; }
 

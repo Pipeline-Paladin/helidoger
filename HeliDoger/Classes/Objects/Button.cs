@@ -4,11 +4,11 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-using HeliDoger.Interfaces;
+using HeliDoger.abstractclasses;
 
 namespace HeliDoger
 {
-    public class Button : IStaticObject
+    public class Button : StaticObject
     {
         private Texture2D _buttonTexture;
         private Rectangle _buttonRectangle;

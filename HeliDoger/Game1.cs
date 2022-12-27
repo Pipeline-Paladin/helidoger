@@ -1,110 +1,97 @@
-﻿using HeliDoger.Classes;
-using HeliDoger.Classes.levels;
-using HeliDoger.Interfaces;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
+using HeliDoger.Classes.Screens;
+using HeliDoger.Classes;
+using HeliDoger.abstractclasses;
+
 
 namespace HeliDoger
 {
-    public class Game1 : Game
+    public class Game1 : Game   // Singleton pattern
     {
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-        private IScreen _gameScreen;
-       
-        private IScreen _tempGameScreen;
+        private SpriteBatch _spriteBatch;     
+        public static Game1 gamestate { get; private set; }
+
+        public static int enemydiff = 4;
+        public static int powerdiff = 10;
+        public static int coindiff = 7;
 
       
-      
-        public static Game1 gameState { get; private set; }
-
-        public static int
-             ScreenWidth = 1422,
-             ScreenHeight = 800;
 
         public Game1()
         {
+            gamestate = this;
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
-            gameState = this;
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
-            Window.AllowUserResizing = false;
-            Window.AllowAltF4 = true;
-            Window.Title = "HeliDoger";
-            _gameScreen = new MenuScreen(Content);
-           
-
+            _gameScreen = new Menu(Content);
         }
 
+
+        public static int ScreenWidth = 1422;
+        public static int ScreenHeight = 800;
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+           
             _graphics.PreferredBackBufferWidth = ScreenWidth;
             _graphics.PreferredBackBufferHeight = ScreenHeight;
             _graphics.ApplyChanges();
         }
 
         protected override void Update(GameTime gameTime)
-        { 
+        {
             MouseState mouse = Mouse.GetState();
             _gameScreen.Update(gameTime, mouse);
             base.Update(gameTime);
-            
         }
 
         protected override void Draw(GameTime gameTime)
         {
-
-            _spriteBatch.Begin();
+            GraphicsDevice.Clear(Color.Black);
+            _spriteBatch.Begin(transformMatrix: _gameScreen.Camera.GetTransform());
             _gameScreen.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
 
-            if (_tempGameScreen != null)
+            if (_newGameScreen != null)
             {
-                _gameScreen = _tempGameScreen;
-                _tempGameScreen = null;
+                _gameScreen = _newGameScreen;
+                _newGameScreen = null;
             }
         }
-        
-        public void ChangeScreen(string newState)
-        { 
-              switch (newState)
+        private Screen _gameScreen;
+        private Screen _newGameScreen;
+        public void ChangeScreen(string newscreen)
+        {
+            switch (newscreen)
             {
                 case "menu":
-                    _tempGameScreen = new MenuScreen(Content);
+                    _newGameScreen = new Menu(Content);
                     break;
-               
-                case "start":
-                    _tempGameScreen = new MainGame(Content);
+                case "death":
+                    _newGameScreen = new DeathScreen(Content);
                     break;
-                case "info":
-                    _tempGameScreen = new MenuScreen(Content);
-                    break;
-                case "deathscreen":
-                    _tempGameScreen = new MenuScreen(Content);
-                    break;
-                case "back":
-                    
-                    break;
+              
             }
-            
-            if (newState == "MainMenu")
+        }
+        public void ChangeScreen(string newscreen, int enemydif, int powerdiff, int coindiff,bool day)
+        {
+            switch (newscreen)
             {
-                gameState.ChangeScreen("MainMenu");
-               
+                case "play":
+                    _newGameScreen = new MainGame(Content , enemydif, powerdiff, coindiff,day);
+                    break;
 
             }
         }
-        
     }
 }
